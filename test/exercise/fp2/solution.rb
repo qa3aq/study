@@ -16,12 +16,17 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map
-        # my_arr = MyArray.new
-        # my_each { |element| my_arr << yield(element) }
+        return if empty?
+
+        my_reduce(MyArray.new) { |accumulator, element| accumulator << yield(element) }
       end
 
       # Написать свою функцию my_compact
-      def my_compact; end
+      def my_compact
+        return if empty?
+
+        my_reduce(MyArray.new) { |accumulator, element| element.nil? ? accumulator : accumulator << element }
+      end
 
       # Написать свою функцию my_reduce
       def my_reduce(accumulator = nil, &block)
