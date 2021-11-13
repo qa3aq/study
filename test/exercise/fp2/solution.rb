@@ -5,23 +5,32 @@ module Exercise
       # Использовать свои написанные функции для реализации следующих - можно.
 
       # Написать свою функцию my_each
-      def my_each
-        for element in self
-          yield element
-        end
+      def my_each(&block)
+        return if empty?
+
+        first, *rest = self
+        yield first
+        MyArray.new(rest).my_each(&block)
+        self
       end
 
       # Написать свою функцию my_map
       def my_map
-        my_arr = MyArray.new
-        my_each { |element| my_arr << yield(element) }
+        # my_arr = MyArray.new
+        # my_each { |element| my_arr << yield(element) }
       end
 
       # Написать свою функцию my_compact
       def my_compact; end
 
       # Написать свою функцию my_reduce
-      def my_reduce; end
+      def my_reduce(accumulator = nil, &block)
+        return accumulator if empty?
+
+        first, *rest = self
+        accumulator = accumulator.nil? ? first : yield(accumulator, first)
+        MyArray.new(rest).my_reduce(accumulator, &block)
+      end
     end
   end
 end

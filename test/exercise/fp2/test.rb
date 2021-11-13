@@ -11,6 +11,7 @@ class Exercise::Fp2Test < Minitest::Test
   end
 
   def test_my_each
+    # skip
     result = []
     my_result = []
 
@@ -22,6 +23,7 @@ class Exercise::Fp2Test < Minitest::Test
   end
 
   def test_my_map
+    skip
     func = ->(element) { element * @int }
     assert @array.map(&func) == @my_array.my_map(&func)
     assert @array.map(&func).map(&func) == @my_array.my_map(&func).my_map(&func)
@@ -38,7 +40,7 @@ class Exercise::Fp2Test < Minitest::Test
   end
 
   def test_my_reduce
-    skip
+    # skip
     func = ->(acc, element) { acc * element }
 
     assert @array.reduce(&func) == @my_array.my_reduce(&func)
